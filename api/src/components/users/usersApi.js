@@ -7,7 +7,9 @@ export default class UserApi {
 
     constructor(){
         this.UserService = new UserService();
+        //----------------- limit params getAllBy -------------------
         this.userParams = ['username', 'age']
+        //----------------- limit params getAllBy -------------------
     }
 
 
@@ -127,12 +129,14 @@ export default class UserApi {
         //----------------- check dates comprise entre -------------------
 
         const query = req.query;
+        //----------------- limit params getAllBy -------------------
         let validParams = true;
         Object.keys(query).map(param => {
             if (this.userParams.indexOf(param) === -1) {
                 validParams = false;
             }
         })
+        //----------------- limit params getAllBy -------------------
         if (validParams) {
             if (query.username && query.username.length < 2) {
                 const message = 'Le terme de recherche doit contenir au moins 2 caractères';
