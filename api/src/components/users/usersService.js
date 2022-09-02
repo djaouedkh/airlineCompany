@@ -20,10 +20,7 @@ export default class UserService {
     }
 
     async getAllUsersBy(terms){
-        Object.entries(terms).map(term => {
-            console.log(term[0]);
-        })
-        // return await Users.findAndCountAll({ where: { username: { [Op.like]: `%${terms.username}%` }}, order: [['username', 'ASC']]})
+        console.log(terms);
         return await Users.findAndCountAll({ 
             where: { 
                 [Op.and]: [

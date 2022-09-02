@@ -10,7 +10,7 @@ export default class BookingApi {
     /**
      * @api {get} /bookings/:id Request booking information
      * @apiName get
-     * @apiGroup booking
+     * @apiGroup bookings
      *
      * @apiParam {Number} id booking's unique ID.
      *
@@ -186,7 +186,7 @@ export default class BookingApi {
     }
 
     /**
-     * @api {update} /bookings/ Request bookings edit
+     * @api {update} /bookings/:id Request bookings edit
      * @apiName update
      * @apiGroup bookings
      * 
@@ -254,7 +254,7 @@ export default class BookingApi {
     }
 
     /**
-     * @api {delete} /bookings/ Request bookings delete
+     * @api {delete} /bookings/:id Request bookings delete
      * @apiName delete
      * @apiGroup bookings
      * 

@@ -7,7 +7,9 @@ export default class UserApi {
 
     constructor(){
         this.UserService = new UserService();
+        this.userParams = ['username', 'age']
     }
+
 
     /**
      * @api {get} /users/:id Request User information
@@ -69,7 +71,7 @@ export default class UserApi {
 
     /**
      * @api {get} /users/ Request Users informations
-     * @api {get} /users?username=Joh Request Users informations for All username that begin with "jo" => johnathan, joe, joshua etc..
+     * @apiQuery [username] [get user by username]
      * @apiName getAllUser
      * @apiGroup User
      *
@@ -108,31 +110,37 @@ export default class UserApi {
      *     .
      */
     async getAllUsers(req, res){
-        var dateFrom = "02/05/2013";
-        var dateTo = "02/09/2013";
-        var dateCheck = "01/05/2013";
-
-        var d1 = dateFrom.split("/");
-        var d2 = dateTo.split("/");
-        var c = dateCheck.split("/");
-
-        var from = new Date(d1[2], parseInt(d1[1])-1, d1[0]);  //-1 because months are from 0 to 11
-        var to   = new Date(d2[2], parseInt(d2[1])-1, d2[0]);
-        var check = new Date(c[2], parseInt(c[1])-1, c[0]);
-
-        console.log(check >= from && check <= to)
+        //----------------- check dates comprise entre -------------------
+        // var dateFrom = "02/05/2013";
+        // var dateTo = "02/09/2013";
+        // var dateCheck = "01/05/2013";
+        
+        // var d1 = dateFrom.split("/");
+        // var d2 = dateTo.split("/");
+        // var c = dateCheck.split("/");
+        
+        // var from = new Date(d1[2], parseInt(d1[1])-1, d1[0]);  //-1 because months are from 0 to 11
+        // var to   = new Date(d2[2], parseInt(d2[1])-1, d2[0]);
+        // var check = new Date(c[2], parseInt(c[1])-1, c[0]);
+        
+        // console.log(check >= from && check <= to)
+        //----------------- check dates comprise entre -------------------
 
         const query = req.query;
-        if (query.username || query.age) {
-            const username = query.username;
-            if (username.length < 2) {
+        let validParams = true;
+        Object.keys(query).map(param => {
+            if (this.userParams.indexOf(param) === -1) {
+                validParams = false;
+            }
+        })
+        if (validParams) {
+            if (query.username && query.username.length < 2) {
                 const message = 'Le terme de recherche doit contenir au moins 2 caractères';
                 return res.status(400).json({message});
             }
             await this.UserService.getAllUsersBy(query)
-            // await this.UserService.getAllUsersBy(username)
             .then(({count, rows}) => { 
-                const message = `Il y a ${count} utilisateur(s) qui correspondent au critère de recherche username et le terme ${username}.`;
+                const message = `Il y a ${count} utilisateur(s) qui correspondent au critère de recherche ${Object.keys(query)} et le terme ${Object.values(query)}.`;
                 res.json({message, data: rows});
             })
             .catch((error) => {
@@ -217,7 +225,7 @@ export default class UserApi {
     }
 
     /**
-     * @api {update} /users/ Request Users edit informations
+     * @api {update} /users/:id Request Users edit informations
      * @apiName updateUser
      * @apiGroup User
      * 
@@ -286,7 +294,7 @@ export default class UserApi {
     }
 
     /**
-     * @api {delete} /users/ Request Users delete
+     * @api {delete} /users/:id Request Users delete
      * @apiName deleteUser
      * @apiGroup User
      * 

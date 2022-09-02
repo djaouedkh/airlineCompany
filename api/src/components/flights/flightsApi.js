@@ -10,7 +10,7 @@ export default class FlightApi {
     /**
      * @api {get} /flights/:id Request flight information
      * @apiName get
-     * @apiGroup Flight
+     * @apiGroup Flights
      *
      * @apiParam {Number} id Flight's unique ID.
      *
@@ -208,7 +208,7 @@ export default class FlightApi {
     }
 
     /**
-     * @api {update} /flights/ Request flights edit
+     * @api {update} /flights/:id Request flights edit
      * @apiName updateFlights
      * @apiGroup Flights
      * 
@@ -281,7 +281,7 @@ export default class FlightApi {
     }
 
     /**
-     * @api {delete} /flights/ Request flights delete
+     * @api {delete} /flights/:id Request flights delete
      * @apiName deleteFlights
      * @apiGroup Flights
      * 

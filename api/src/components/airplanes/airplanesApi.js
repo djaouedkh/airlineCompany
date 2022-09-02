@@ -10,7 +10,7 @@ export default class AirplaneApi {
     /**
      * @api {get} /airplanes/:id Request airplane information
      * @apiName get
-     * @apiGroup airplane
+     * @apiGroup airplanes
      *
      * @apiParam {Number} id airplane's unique ID.
      *
@@ -185,7 +185,7 @@ export default class AirplaneApi {
     }
 
     /**
-     * @api {update} /airplanes/ Request airplanes edit
+     * @api {update} /airplanes/:id Request airplanes edit
      * @apiName update
      * @apiGroup airplanes
      * 
@@ -252,7 +252,7 @@ export default class AirplaneApi {
     }
 
     /**
-     * @api {delete} /airplanes/ Request airplanes delete
+     * @api {delete} /airplanes/:id Request airplanes delete
      * @apiName delete
      * @apiGroup airplanes
      * 

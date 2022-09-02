@@ -62,7 +62,7 @@ export default class CityApi {
      * @api {get} /cities/ Request cities informations
      * @api {get} /cities?postalCode=1 Request cities informations
      * @apiName getAll
-     * @apiGroup cities
+     * @apiGroup Cities
      *
      * @apiHeader {String} authorization x-api-key <API_KEY>.
      * @apiHeaderExample {json} Header-Example:
